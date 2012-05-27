@@ -1,0 +1,10 @@
+<div class="web-cat-box"> 
+  <div class="title">
+    <h2>Weblog Categories</h2>
+  </div>
+  <ul class="web-cat"> 
+    <?php foreach($this->categories as $cat): ?>
+    <li><a href="/categories/<?= $cat['id'] ?>" title="<?= $cat['title'] ?>"><?= $cat['title'] ?></a></li>
+    <?php endforeach; ?> 
+  </ul> 
+</div>

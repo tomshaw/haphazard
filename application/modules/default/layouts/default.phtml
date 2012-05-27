@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<?php echo $this->headTitle() ?>
+<?php echo $this->headLink() ?>
+<?php echo $this->headStyle() ?>
+<?php echo $this->jQuery(); ?>
+<?php echo $this->headScript() ?>
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container-fluid"> <a class="brand" href="/">Zend Framework Project &copy; Tom Shaw 2012</a>
+      <ul class="nav">
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <p class="pull-right" style="margin:10px 5px 0 0;">Logged in as <a href="/account"><?php echo $this->auth_name ?></a> - <?php echo $this->auth_role ?></p>
+    </div>
+  </div>
+</div>
+
+<div class="branding-fixed-top">
+  <p class="pull-right" style="margin:8px 5px 0 0;color:#fff;"><?php echo date('l jS \of F Y h:i:s A', time()) ?></p><h2 style="margin-left:15px;font-size:1.4em;color:#fff;"><?php echo $this->auth_name ?> - <?php echo $this->auth_role ?></h2>
+</div>
+
+<?php $controller = Zend_Controller_Front::getInstance()->getRequest()->getControllerName(); ?>
+<?php $auth = Zend_Auth::getInstance(); ?>
+<div id="container">
+  <div id="navigation-column">
+    <ul class="nav nav-list">
+      <li class="nav-header">General options</li>
+      <li <?php if($controller == 'index'): ?>class="active"<?php endif; ?>><a href="/"><i class="<?php if($controller == 'index'): ?>icon-white<?php endif; ?> icon-home"></i> Home</a></li>
+      <li <?php if($controller == 'blog'): ?>class="active"<?php endif; ?>><a href="/blog"><i class="<?php if($controller == 'blog'): ?>icon-white<?php endif; ?> icon-book"></i> Blog</a></li>
+      <li <?php if($controller == 'tutorials'): ?>class="active"<?php endif; ?>><a href="/tutorials"><i class="<?php if($controller == 'tutorials'): ?>icon-white<?php endif; ?> icon-pencil"></i> Tutorials</a></li>
+      <li <?php if($controller == 'polls'): ?>class="active"<?php endif; ?>><a href="/polls"><i class="<?php if($controller == 'polls'): ?>icon-white<?php endif; ?> icon-align-left"></i> Polls</a></li>
+      <?php if($auth->hasIdentity()): ?>
+      <li <?php if($controller == 'account'): ?>class="active"<?php endif; ?>><a href="/account"><i class="<?php if($controller == 'account'): ?>icon-white<?php endif; ?> icon-user"></i> Profile</a></li>
+      <?php endif; ?>
+      <?php if($auth->hasIdentity()): ?>
+      <li><a href="/logout"><i class="icon-warning-sign"></i> Logout</a></li>
+      <?php else: ?>
+      <li <?php if($controller == 'login'): ?>class="active"<?php endif; ?>><a href="/login"><i class="<?php if($controller == 'login'): ?>icon-white<?php endif; ?> icon-gift"></i> Login</a></li>
+      <?php endif; ?>
+      <?php if (($auth->getIdentity()) && $auth->getIdentity()->identity == 3): ?>
+      <li class="nav-header">Administrator options</li>
+      <li><a href="/admin"><i class="icon-cog"></i> Administration</a></li>
+      <?php endif; ?>
+      <li class="divider"></li>
+      <li><a href="/help"><i class="icon-flag"></i> Help</a></li>
+    </ul>
+    <?php echo $this->placeholder('content_right') ?>
+  </div>
+  <div id="content-column">
+    <?php echo $this->placeholder('messages') ?>
+    <?php echo $this->inlineScript(); ?>
+    <?php echo $this->layout()->content ?>
+    <?php echo $this->placeholder('profiler') ?>
+  </div>
+</div>
+</body>
+</html>

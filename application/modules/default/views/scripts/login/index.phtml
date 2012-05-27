@@ -1,0 +1,57 @@
+<div class="page-header">
+  <h1>Zend Framework Rest Controller Testing</h1>
+  <p>A simple quick start application created to explorer and learn how to use controllers that extend Zend_Rest_Controller.</p>
+</div>
+
+<div id="errorsReview"></div>
+
+<div class="row">
+  <div class="span12">
+    <form class="form-horizontal well centered_form" id="login-form" method="post" action="/login/login">
+      <?php echo $this->token ?>
+      <fieldset>
+        <legend>Login</legend>
+        <div class="control-group">
+          <label class="control-label" for="email">Email address</label>
+          <div class="controls">
+            <input class="input-xlarge focused" id="email" type="text" name="email" value="" placeholder="Email">
+            <span class="help-inline">What's your email address?</span>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="password">Password</label>
+          <div class="controls">
+            <input class="input-xlarge focused" id="password" type="password" name="password" value="" placeholder="Password">
+            <span class="help-inline">Enter your password.</span>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="remember_me">Remember me.</label>
+          <div class="controls">
+            <label class="checkbox">
+              <input type="checkbox" id="remember_me" name="remember_me" value="1">
+              Keep me logged-in on this computer.. </label>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" id="submit" class="btn btn-primary">Submit</button>
+          <button class="btn">Cancel</button>
+        </div>
+        <a href="/lostpassword">Forgot password?</a> &nbsp; Don't have an account? <a href="/register">Signup</a>
+      </fieldset>
+    </form>
+  </div>
+</div>
+<!-- http://www.kadrmasconcepts.com/blog/2012/02/20/underscore-js-template-revealed/ -->
+<script id="errorTemplate" type="text/html">
+<div class="alert alert-block alert-error fade in">
+  <a class="close" data-dismiss="alert" href="#">x</a>
+  <h4 class="alert-heading" style="margin-top:-5px;">Oh snap! You got an error!</h4>
+  <br/>
+  <% for(var i = 0; i < errors.length; i++){ %>
+  <p><%= errors[i] %></p>
+  <% } %>
+  <br/>
+  <p><a class="btn btn-danger" href="mailto:admin@mywebsite.com">Notifiy Administrator</a> <a class="btn" href="/login">Return to menu.</a></p>
+</div>
+</script>

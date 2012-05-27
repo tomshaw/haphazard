@@ -1,0 +1,61 @@
+<div id="blog-container">  
+  <div class="page-header" style="border-bottom:none;">
+    <h1><?= urldecode($this->data->title) ?></h1> 
+    <h1><small>By <i><?= $this->data->author; ?>.</i> Published on, <?= new Zend_Date($this->data->created) ?>.</small></h1>
+  </div>
+  <p class="blog"><?= nl2br($this->data->body) . '<br /><br />' . nl2br($this->data->continued) ?></p>
+</div>
+
+<?php if(sizeof($this->comments)):?>
+<div class="page-header">
+  <h1>Latest comments</h1>
+</div>
+<?php foreach($this->comments as $comment): ?>
+<div id="comment" style="margin-top:20px;">
+  <div style="float:left;width:100px;"><?php echo $this->gravatar($comment->email); ?></div>
+  <div id="comment-right" style="float:left;width:400px;">
+    <div id="comment-body"><strong><?= new Zend_Date($comment->created) ?> <?= $comment->author; ?></strong>
+      <div id="comment-text"><?= $comment->body ?></div>
+    </div>
+  </div>
+  <div style="clear:both;"></div>
+</div>
+<?php endforeach; ?>
+<?php endif;?>
+
+<?php if (Zend_Auth::getInstance()->hasIdentity()): ?>
+<div class="page-header">
+  <h1>Add a comment</h1>
+</div>
+<div class="row">
+  <div class="span12">
+    <form class="form-horizontal" method="post" action="/blog/entry">
+    <?php echo $this->token ?>
+    <input type="hidden" name="entry_id" value="<?php echo $this->data->id ?>"> 
+      <?php echo $this->token ?>
+      <fieldset id="transaction_form">
+        <div class="control-group">
+          <label class="control-label" for="comment_title">Title:</label>
+          <div class="controls">
+            <div class="input-prepend">
+              <span class="add-on"><i class="icon-list-alt"></i></span><input type="text" id="comment_title" name="title" value="">
+              <p class="help-block">Please enter the quote number required to override transaction.</p>
+            </div>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="comment_body">Comment:</label>
+          <div class="controls">
+            <textarea id="comment_body" name="body" class="input-xlarge" cols="35" rows="6"></textarea>
+            <p class="help-block">Please enter the comment body here.</p>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button id="submit" data-loading-text="submitting..." class="btn btn-primary">Submit</button>
+          <button class="btn">Cancel</button>
+        </div>  
+      </fieldset>
+    </form>
+  </div>
+</div>
+<?php endif;?>

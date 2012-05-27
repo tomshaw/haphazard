@@ -1,0 +1,153 @@
+<div class="page-header">
+  <h1>Haphazard - Zend Framework Development</h1>
+  <p>A simple quick start application created to explorer and learn the basics of Zend Framework</p>
+</div>
+
+<div id="paginator"></div>
+<div id="datagrid"></div>
+<div id="successReview"></div>
+<div id="errorsReview"></div>
+<div id="editform"></div>
+<div id="createform"></div>
+
+<script id="editTemplate" type="text/html">
+<div class="row" style="margin-top:25px;">
+  <div class="span12">
+    <form class="form-horizontal well centered_form" id="account-form" style="margin-top:-10px;" method="post" action="/admin/users/put">
+      <input type="hidden" name="token" id="token" value="<%= data.token %>">
+      <input type="hidden" name="id" id="id" value="<%= data.id %>">
+      <fieldset>
+        <legend><%= data.name %></legend>
+        <div class="control-group">
+          <label class="control-label" for="name">Full name</label>
+          <div class="controls">
+            <input class="input-xlarge focused" id="name" type="text" name="name" value="<%= data.name %>" placeholder="Full name">
+            <span class="help-inline">Enter your first and last name.</span>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="email">Email address</label>
+          <div class="controls">
+            <input class="input-xlarge focused" id="email" type="text" name="email" value="<%= data.email %>" placeholder="Email">
+            <span class="help-inline">What's your email address?</span>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="password">Password</label>
+          <div class="controls">
+            <input class="input-xlarge focused" id="password" type="password" name="password" value="" placeholder="Password">
+            <span class="help-inline">6 characters or more! Be tricky.</span>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="username">Username</label>
+          <div class="controls">
+            <input class="input-xlarge focused" id="username" type="text" name="username" value="<%= data.username %>" placeholder="Username">
+            <span class="help-inline">Don't worry you can change it later.</span>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="newsletter">Newsletter</label>
+          <div class="controls">
+            <label class="checkbox">
+              <input type="checkbox" id="newsletter" name="newsletter" value="1" checked="checked">
+              Signup for our newsletter! 
+           </label>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" id="submit" data-loading-text="submitting..." class="btn btn-primary">Submit</button>
+          <button class="btn">Cancel</button>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>
+</script>
+
+<script id="customerTemplate" type="text/html">
+<table id="names" class="table table-striped">
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Name</th>
+      <th>Created</th>
+      <th>Modified</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for(var i = 0; i < customerList.length; i++) { %>
+    <% var customer = customerList[i]; %>
+    <tr style="cursor:pointer;" id="record-<%= customer.id %>" data-href="/admin/users/get/id/<%= customer.id %>" title="/admin/users/edit/id/<%= customer.id %>">
+      <td><%= customer.username %></td>
+      <td><%= customer.email %></td>
+      <td><%= customer.name %></td>
+      <td><%= customer.created %></td>
+      <td><%= customer.modified %></td>
+	  <td><a class="delete" id="inline" href="/admin/users/delete/id/<%= customer.id %>" title="/admin/users/delete/id/<%= customer.id %>">Delete</a></td>
+    </tr>
+    <% } %>
+  </tbody>
+</table>
+</script>
+
+<script id="paginatorTemplate" type="text/html">
+<% if(data.pageCount) { %>
+<div class="dataTables_paginate paging_bootstrap pagination" id="jumping">
+  <ul>
+    <% if (data.previous) { %>
+    <li class="prev"><a style="cursor:pointer;" data-href="/admin/users/getitems/page/<%= data.first %>">First</a></li>
+    <% } else { %>
+    <li class="prev disabled"><a href="#">First</a></li>
+    <% } %>
+    <% if (data.previous) { %>
+    <li><a style="cursor:pointer;" data-href="/admin/users/getitems/page/<%= data.previous %>">&larr; Previous</a></li>
+    <% } else { %>
+    <li class="prev disabled"><a href="#">Previous</a></li>
+    <% } %>
+    <% Object.keys(data.pagesInRange).forEach(function(key) { %>
+    <% var page = data.pagesInRange[key]; %>
+    <li <% if(page == data.current) { %>class="active"<% } %>><a style="cursor:pointer;" data-href="/admin/users/getitems/page/<%= page %>"><%= page %></a></li> 
+    <% }); %>
+    <% if (data.next) { %>
+    <li class="next"><a style="cursor:pointer;" data-href="/admin/users/getitems/page/<%= data.next %>">Next &rarr;</a></li>
+    <% } else { %>
+    <li class="next disabled"><a href="#">Next</a></li>
+    <% } %>
+    <% if (data.next) { %>
+    <li class="next"><a style="cursor:pointer;" data-href="/admin/users/getitems/page/<%= data.last %>">Last</a></li>
+    <% } else { %>
+    <li class="next disabled"><a href="#">Last</a></li>
+    <% } %>
+  </ul>
+</div>
+<% } %>
+</script>
+
+<script id="successTemplate" type="text/html">
+<div class="alert alert-success fade in">
+  <a class="close" data-dismiss="alert" href="#">x</a>
+  <strong>Completed successfully!</strong>
+  <br/><br/>
+  <% for(var i = 0; i < success.length; i++){ %>
+  <p><%= success[i] %></p>
+  <% } %>
+  <br/>
+  <p><a class="btn" href="/admin">Return to menu.</a></p>
+</div>
+</script>
+
+<script id="errorTemplate" type="text/html">
+<div class="alert alert-block alert-error fade in">
+  <a class="close" data-dismiss="alert" href="#">x</a>
+  <h4 class="alert-heading" style="margin-top:-5px;">Oh snap! You got an error!</h4>
+  <br/>
+  <% for(var i = 0; i < errors.length; i++){ %>
+  <p><%= errors[i] %></p>
+  <% } %>
+  <br/>
+  <p><a class="btn btn-danger" href="mailto:admin@mywebsite.com">Notifiy Administrator</a> <a class="btn" href="/admin">Return to menu.</a></p>
+</div>
+</script>

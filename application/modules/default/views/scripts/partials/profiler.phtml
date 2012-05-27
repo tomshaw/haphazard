@@ -1,0 +1,49 @@
+<table>
+  <thead>
+    <tr>
+      <th width="3%" style="text-align: center;">#</th>
+      <th width="87%">&nbsp;Raw SQL Statement</th>
+      <th width="10%" style="text-align: center;">Time</th>
+    </tr>
+  </thead>
+  <tbody>
+  	<?php foreach($this->queries as $out): ?>
+    <tr>
+      <td style="text-align: center; vertical-align: top;"><?= $out['count'] ?>.</td>
+      <td><strong><?= $out['query'] ?></strong></td>
+      <td><i><?= $out['seconds'] ?> ms.</i></td>
+    </tr>
+    <?php endforeach; ?>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 85%">&nbsp;Statistic</th>
+      <th style="text-align: center; width: 20%">Value</th>
+    </tr>
+  </thead>	
+  <tbody>
+    <tr>
+      <td><strong>Total queries</strong>.</td>
+      <td>#<?= $this->query_count ?>.</td>
+    </tr>
+    <tr>
+      <td><strong>Average query length</strong>.</td>
+      <td><i><?= $this->query_length ?> ms.</i></td>
+    </tr>
+    <tr>
+      <td><strong>Queries per second</strong>.</td>
+      <td><i><?= $this->queries_per_second ?> ms.</i></td>
+    </tr>
+    <tr>
+      <td><strong>Longest query length</strong>.</td>
+      <td><i><?= $this->longest_query_length ?> ms.</i></td>
+    </tr>
+    <tr>
+      <td><strong>Longest query</strong>.</td>
+      <td><i><?= $this->longest_query ?> ms.</i></td>
+    </tr>
+  </tbody>
+</table>

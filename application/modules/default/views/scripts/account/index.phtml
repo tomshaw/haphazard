@@ -1,0 +1,85 @@
+<div class="page-header">
+  <h1>Zend Framework Rest Controller Testing</h1>
+  <p>A simple quick start application created to explorer and learn how to use controllers that extend Zend_Rest_Controller.</p>
+</div>
+
+<div id="successReview"></div>
+<div id="errorsReview"></div>
+
+<div class="row">
+  <div class="span12">
+    <form class="form-horizontal well centered_form" id="account-form" style="margin-top:-10px;" method="post" action="/account/put">
+      <?php echo $this->token ?>
+      <fieldset>
+        <legend><?php echo $this->auth_name ?> - <?php echo $this->auth_role ?></legend>
+        <div class="control-group">
+          <label class="control-label" for="name">Full name</label>
+          <div class="controls">
+            <input class="input-xlarge focused" id="name" type="text" name="name" value="<?php echo $this->data->name ?>" placeholder="Full name">
+            <span class="help-inline">Enter your first and last name.</span>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="email">Email address</label>
+          <div class="controls">
+            <input class="input-xlarge focused" id="email" type="text" name="email" value="<?php echo $this->data->email ?>" placeholder="Email">
+            <span class="help-inline">What's your email address?</span>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="password">Password</label>
+          <div class="controls">
+            <input class="input-xlarge focused" id="password" type="password" name="password" value="" placeholder="Password">
+            <span class="help-inline">6 characters or more! Be tricky.</span>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="username">Username</label>
+          <div class="controls">
+            <input class="input-xlarge focused" id="username" type="text" name="username" value="<?php echo $this->data->username ?>" placeholder="Username">
+            <span class="help-inline">Don't worry you can change it later.</span>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="newsletter">Newsletter</label>
+          <div class="controls">
+            <label class="checkbox">
+              <input type="checkbox" id="newsletter" name="newsletter" value="1" <?php if($this->newsletter==1): ?>checked="checked"<?php endif;?>>
+              Signup for our newsletter! </label>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" id="submit" data-loading-text="submitting..." class="btn btn-primary">Submit</button>
+          <button class="btn">Cancel</button>
+        </div>
+        Have an account? <a href="/login" title="Sing in">Sign in</a>
+      </fieldset>
+    </form>
+  </div>
+</div>
+
+<script id="successTemplate" type="text/html">
+<div class="alert alert-success fade in">
+  <a class="close" data-dismiss="alert" href="#">x</a>
+  <strong>Completed successfully!</strong>
+  <br/><br/>
+  <% for(var i = 0; i < success.length; i++){ %>
+  <p><%= success[i] %></p>
+  <% } %>
+  <br/>
+  <p><a class="btn" href="/account">Return to menu.</a></p>
+</div>
+</script>
+
+<script id="errorTemplate" type="text/html">
+<div class="alert alert-block alert-error fade in">
+  <a class="close" data-dismiss="alert" href="#">x</a>
+  <h4 class="alert-heading" style="margin-top:-5px;">Oh snap! You got an error!</h4>
+  <br/>
+  <% for(var i = 0; i < errors.length; i++){ %>
+  <p><%= errors[i] %></p>
+  <% } %>
+  <br/>
+  <p><a class="btn btn-danger" href="mailto:admin@mywebsite.com">Notifiy Administrator</a> <a class="btn" href="/login">Return to menu.</a></p>
+</div>
+</script>

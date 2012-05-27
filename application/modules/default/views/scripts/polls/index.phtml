@@ -1,0 +1,15 @@
+<div class="page-header">
+  <h1>Poll surveys <small>Please take a few moments to take one of our online surveys.</small></h1>
+</div>
+ 
+<div class="pollbox">
+  <?php foreach($this->rows as $row): ?>
+  <div class="polllist">
+    <h2><a href="/polls/<?= $row['id'] ?>" title="<?= $row['title'] ?>"><?= $row['title'] ?></a></h2>
+    <div class="pollservice <?= $row['class'] ?>"> 
+      <p class="blog"><?= $row['description'] ?><br/><a class="label label-info" href="/polls/view/<?= $row['id'] ?>" title="View Poll Results: <?= $row['title'] ?>">View Results!</a></p>
+    </div>
+  </div>
+  <?php endforeach; ?>
+</div>
+

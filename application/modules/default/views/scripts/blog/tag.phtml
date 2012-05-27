@@ -1,0 +1,24 @@
+<div class="navlink">
+  <ul>
+    <li class="icon-home"><a class="floatr" href="/rss/1.0" title="Subscribe To RSS Feed."><img src="/img/rss.gif" alt="Subscribe To RSS Feed."></a><a href="/blog">Blog listing</a>  <strong>&#8249;</strong> <a href="/tag/<?= urlencode($this->title); ?>"><?= urlencode($this->title); ?></a></li>
+  </ul>
+</div>
+<div id="blog-list">
+  <?php if(sizeof($this->entries)): ?>
+  <?php foreach($this->entries as $entry): ?>
+  <div class="blog">
+    <h2><a href="/entry/<?= urlencode($entry->title) ?>" title="<?= $entry->title ?>"><?= $entry->title ?></a></h2>
+    <h4>By <i><?= $entry->author ?>.</i> Published on, <?= new Zend_Date($entry->created) ?>.</h4>
+    <ul>
+      <li><?= nl2br($entry->body) ?></li>
+      <li><small class="floatr">Comments: <?= $entry->comment_count ?></small>Full story: <a href="/entry/<?= urlencode($entry->title) ?>" title="Read: <?= $entry->title ?>"><?= $entry->title ?></a></li>
+    </ul>
+  </div>
+  <?php endforeach; ?>
+  <?php else: ?>
+  <div class="blog">
+    <h2>No Weblog Entries Found</h2>
+    <p>Your search produced no Weblog entries. Please try again...</p>
+  </div>
+  <?php endif; ?>
+</div>

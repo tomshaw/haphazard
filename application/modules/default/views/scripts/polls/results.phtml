@@ -1,0 +1,23 @@
+<div class="page-header">
+  <h1>Poll results <small><?= $this->title ?></small></h1>
+</div>
+
+<p class="blog" style="font-size:1.2em;"><?= $this->description ?></p>
+
+<div id="pollresults" class="pviewresults">
+  <div id="poll_block" style="padding:5px;">
+    <div class="optcontainer">
+      <h3 style="padding:5px; font-size:15px;"><?= $this->title ?></h3>
+      <div class="span6">
+        <?php foreach($this->pollset as $option): ?>
+        <div style="margin: 10px 0 10px;">
+          <span style="margin: 0 0 5px;">#<?= $option['count'] ?>. <?= $option['options'] ?> - <?= $option['votes'] ?> Votes - <?= $option['percent'] ?>%</span><br />
+          <div class="progress <?= $option['class'] ?> progress-striped active">
+            <div class="bar" style="width: <?= $option['percent'] ?>%"></div>
+          </div>
+        </div>
+        <?php endforeach; ?>
+      </div>
+    </div>
+  </div>
+</div> 

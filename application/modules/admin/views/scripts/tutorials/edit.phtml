@@ -1,0 +1,43 @@
+<div class="page-header">
+  <h1>Haphazard - Zend Framework Development</h1>
+  <p>A simple quick start application created to explorer and learn the basics of Zend Framework</p>
+</div>
+
+<h3><?= ucwords(str_replace("-", " ", $this->row->file)) ?> - <?= new Zend_Date($this->row->created); ?></h3> 
+
+<form id="form" method="post" action="/admin/tutorials/edit">
+<input type="hidden" name="id" value="<?= $this->row->id ?>" />  
+<div class="panel"> 
+  <div class="inner"><span class="corners-top"><span></span></span> 
+	<p>Tutorial "<?= ucwords(str_replace("-", " ", $this->row->file)) ?>" was created by, <span style="text-decoration: underline;"><?= $this->user->name ?></span> - [<?= $this->user->email ?>] on <?= new Zend_Date($this->row->created); ?></p> 
+	<fieldset>
+      <dl> 
+        <dt><label for="file">File Name:</label><br /><span>Do not change this name.</span></dt> 
+        <dd><input name="file" id="file" type="text" class="inputbox" maxlength="255" value="<?= $this->row->file ?>" /></dd> 
+      </dl>
+	  <dl> 
+		<dt><label for="category_id">Waiting Tutorials:</label><br /><span>Select the required tutorials and click the submit button.</span></dt>  
+		<dd><?= $this->formSelect('category_id', $this->row->category_id, array('class' => 'input-medium', 'id' => 'category_id'), $this->categories) ?></dd> 
+	  </dl>   
+      <dl> 
+        <dt><label for="description">Description:</label><br /><span>Please provide atleast one paragraph describing the tutorials goals and objectives. This description is used to inform readers at the introduction and listing pages.</span></dt> 
+        <dd><textarea name="description" id="description" class="inputbox" cols="40" rows="7"><?= $this->row->description ?></textarea></dd> 	
+      </dl>
+      <hr>
+      <dl> 
+        <dt><label for="visible">Tutorial is visible:</label><br /><span>When the tutorial is visible, all users can view it live online.</span></dt> 
+        <dd><?= $this->formCheckbox('visible', true, array('id' => 'visible','checked' => $this->row->visible))?></dd> 
+      </dl> 
+      <dl> 
+        <dt><label for="approved">Tutorial is approved:</label><br /><span>When the tutorial is approved it is available to work on by an approved user.</span></dt> 
+        <dd><?= $this->formCheckbox('approved', true, array('id' => 'approved','checked' => $this->row->approved))?></dd> 
+      </dl> 
+	</fieldset> 
+  <span class="corners-bottom"><span></span></span></div> 
+</div> 
+<fieldset class="submit-buttons"> 
+  <input type="reset" value="Reset" name="reset" class="btn" />&nbsp; 
+  <input type="submit" name="submit" value="Submit" class="btn" /> 
+</fieldset> 
+</form>
+<div class="clear"></div> 

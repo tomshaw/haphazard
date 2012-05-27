@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="span12">
+    <form class="form-horizontal well centered_form" method="post" action="/reset">
+      <?php echo $this->token ?>
+      <fieldset>
+        <legend>Reset Password</legend>
+        <div class="control-group">
+          <label class="control-label" for="email">Email address</label>
+          <div class="controls">
+            <input class="input-xlarge focused" id="email" type="text" name="email" value="" placeholder="Email">
+            <span class="help-inline">What's your email address?</span>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Next</button>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>

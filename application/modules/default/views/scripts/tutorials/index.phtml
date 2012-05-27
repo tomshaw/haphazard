@@ -1,0 +1,14 @@
+<?php foreach($this->rows as $row): ?>
+<div id="tutorial">
+  <div class="head"> 
+    <a href="/tutorials/article/<?= $row->file ?>/"><img src="/tuts/<?= $row->file ?>/tutimage.jpg" alt="<?= ucwords(str_replace("-", " ", $row->file)) ?>" /></a>
+    <h2><a href="/tutorials/view/article/<?= $row->file ?>/" title="<?= ucwords(str_replace("-", " ", $row->file)) ?>"><?= ucwords(str_replace("-", " ", $row->file)) ?></a></h2> 
+    <small><?= new Zend_Date($row->created); ?> in <a href="/category/tutorials/<?= $row->category ?>/" title="View all posts in <?= $row->category ?>" rel="category tag"><?= $row->category ?></a> by <a href="/author/<?= $row->author ?>/" title="Post by <?= $row->author ?>"><?= $row->author ?></a></small>
+    <div class="comments">
+      <a href="/tutorials/<?= $row->category ?>/<?= $row->file ?>/#comments" title="Comment on <?= ucwords(str_replace("-", " ", $row->file)) ?>"><?= $row->comment_count ?></a>
+    </div>
+    <p><?= $row->description ?></p>
+    <div class="clear"></div>
+  </div>
+</div>
+<?php endforeach; ?>

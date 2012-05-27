@@ -1,0 +1,12 @@
+<div class="page-header">
+  <h1>Haphazard - Zend Framework Development</h1>
+  <p>A simple quick start application created to explorer and learn the basics of Zend Framework</p>
+</div>
+
+<div class="panel">
+  <div class="inner"><span class="corners-top"><span></span></span>
+    <h3><?php if($this->parent_id): ?>Editing Blog: <?= $this->title ?>.<?php else: ?>Editing Category <?= $this->title ?>.<?php endif; ?></h3>
+    <p>To specify more than one e-mail address enter each on a new line. To match partial addresses use * as the wildcard, e.g. <samp>*@hotmail.com</samp>, <samp>*@*.domain.tld</samp>, etc.</p>
+    <?= $this->form ?>
+  <span class="corners-bottom"><span></span></span></div>
+</div>

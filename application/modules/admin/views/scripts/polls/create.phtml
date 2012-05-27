@@ -1,0 +1,60 @@
+<div class="page-header">
+  <h1>Haphazard - Zend Framework Development</h1>
+  <p>A simple quick start application created to explorer and learn the basics of Zend Framework</p>
+</div>
+
+<form id="form" method="post" action="/admin/polls/create">
+<input type="hidden" name="create" value="1">
+<div class="panel">
+  <div class="inner"><span class="corners-top"><span></span></span>
+    <h3><?php if(isset($this->options)): ?>Select Options<?php else: ?>Select Option Respones<?php endif; ?></h3>
+    <p>To specify more than one e-mail address enter each on a new line. To match partial addresses use * as the wildcard, e.g. <samp>*@hotmail.com</samp>, <samp>*@*.domain.tld</samp>, etc.</p>
+    <fieldset class="fields2">
+      <?php if(isset($this->options)): ?>
+      <dl>
+        <dt>
+          <label for="poll_title">Poll title:</label>
+        </dt>
+        <dd>
+          <input name="title" id="poll_title" type="text" class="inputbox" maxlength="255" />
+        </dd>
+      </dl>
+      <?php for ($i = 0; $i < $this->options; $i++) {  ?>
+      <dl>
+        <dt>
+          <label for="options[<?= $i+1 ?>]">Response <?= $i+1 ?>.</label>
+        </dt>
+        <dd>
+          <input type="text" name="options[<?= $i+1 ?>]" id="options" value="" class="inputbox" />
+        </dd>
+      </dl>
+      <?php } ?>
+      <dl>
+        <dt>
+          <label for="poll_description">Poll description:</label>
+        </dt>
+        <dd>
+          <label for="poll_description">
+            <textarea name="description" id="poll_description" class="inputbox" cols="40" rows="10"></textarea>
+          </label>
+        </dd>
+      </dl>
+      <?php else: ?>
+      <dl>
+        <dt>
+          <label for="poll_options">Number of responses:</label>
+        </dt>
+        <dd>
+          <input type="text" name="options" id="poll_options" value="2" class="inputbox">
+        </dd>
+      </dl>
+      <?php endif; ?>
+    </fieldset>
+    <span class="corners-bottom"><span></span></span></div>
+</div>
+<fieldset class="submit-buttons">
+  <input type="reset" value="Reset" name="reset" class="button2" />
+  &nbsp;
+  <input type="submit" name="submit" value="Submit" class="button1" />
+</fieldset>
+</form>

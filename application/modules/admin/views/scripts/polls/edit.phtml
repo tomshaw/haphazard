@@ -1,0 +1,59 @@
+<div class="page-header">
+  <h1>Haphazard - Zend Framework Development</h1>
+  <p>A simple quick start application created to explorer and learn the basics of Zend Framework</p>
+</div>
+
+<form action="/admin/polls/edit" method="post">
+<input type="hidden" name="id" value="<?= $this->data['poll_id'] ?>">
+<table class="table table-striped table-bordered table-condensed">
+	<tr>
+		<td width="22%" align="right">Poll Title:</td>
+		<td width="78%" align="left" colspan="3"><strong><i><?= $this->data['title'] ?></i></strong></td>
+	</tr>
+	<?php foreach($this->options as $option): ?>
+	<tr>
+		<td align="right"><?= $option['input_option'] ?></td>
+		<td align="left"><?= $option['count'] ?>. <?= $option['option'] ?></td>
+		<td align="center" width="10%"><?= $option['anchor'] ?></td>
+	</tr>
+	<?php endforeach; ?>
+	<tr>
+		<td align="right">Poll Starts:</td>
+		<td colspan="3" align="left">Day: <?= $this->data['start_day'] ?> Month: <?= $this->data['start_month'] ?> Year: <?= $this->data['start_year'] ?></td>
+	</tr>
+	<tr>
+		<td align="right">Poll Expires:</td>
+		<td colspan="3" align="left">Day: <?= $this->data['expire_day'] ?> Month: <?= $this->data['expire_month'] ?> Year: <?= $this->data['expire_year'] ?></td>
+	</tr>
+	<tr>
+		<td align="right">User Can Vote Every:</td>
+		<td colspan="3" align="left">Years: <?= $this->data['vote_years'] ?> Months: <?= $this->data['vote_months'] ?> Days: <?= $this->data['vote_days'] ?> Hours: <?= $this->data['vote_hours'] ?> Minutes: <?= $this->data['vote_minutes'] ?> Seconds: <?= $this->data['vote_seconds'] ?></td>
+	</tr>
+	<tr>
+		<td height="25" align="right">Enable Voting:</td>
+		<td colspan="3" align="left"><input type="radio" name="enabled" value="1" <?= $this->data['enabled_checked'] ?> /></td>
+	</tr>
+	<tr>
+		<td height="25" align="right">Enable Results:</td>
+		<td colspan="3" align="left"><input type="radio" name="confidential" value="1" <?= $this->data['confidential_checked'] ?> /></td>
+	</tr>
+	<tr>
+		<td height="25" align="right">Results Before Voting:</td>
+		<td colspan="3" align="left"><input type="radio" name="votefirst" value="1" <?= $this->data['votefirst_checked'] ?> /></td>
+	</tr>
+	<tr>
+		<td height="25" align="right">Use IP Protection:</td>
+		<td colspan="3" align="left"><input type="radio" name="ip" value="1" <?= $this->data['ip_checked'] ?> /></td>
+	</tr>
+	<tr>
+		<td height="25" align="right">Use Cookie Protection:</td>
+		<td colspan="3" align="left"><input type="radio" name="cookie" value="1" <?= $this->data['cookie_checked'] ?> /></td>
+	</tr>
+	<tr>
+		<td height="25" align="right">Poll Description:</td>
+		<td colspan="3" align="left"><textarea class="inputbox" name="description" id="description" cols="45" rows="10"><?= $this->data['description'] ?></textarea></td>
+	</tr>
+	<tr>
+		<th colspan="4" align="center"><button id="submit" data-loading-text="submitting..." class="btn btn-primary">Submit</button></th>
+	</tr>
+</table></form>

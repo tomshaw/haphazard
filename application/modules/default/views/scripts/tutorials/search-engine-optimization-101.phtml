@@ -1,0 +1,27 @@
+<div class="tutorial-header"> 
+  <h2>
+    <a href="/tutorials/<?php echo $this->row->category ?>/<?php echo $this->row->file ?>/" title="<?php echo ucwords(str_replace("-", " ", $this->row->file)) ?>"><?php echo ucwords(str_replace("-", " ", $this->row->file)) ?></a>
+  </h2>
+  <small>
+    <?php echo new Zend_Date($this->row->created); ?> in <a href="/category/tutorials/<?php echo $this->row->category ?>/" title="View all posts in <?php echo $this->row->category ?>" rel="category tag"><?php echo $this->row->category ?></a> by <a href="/author/<?php echo $this->row->author ?>/" title="Posts by <?php echo $this->row->author ?>"><?php echo $this->row->author ?></a>
+    Comments: <a href="/tutorials/<?php echo $this->row->category ?>/<?php echo $this->row->file ?>/#comments" title="Comment on <?php echo ucwords(str_replace("-", " ", $this->row->file)) ?>">#<?php echo $this->row->count ?></a> 
+  </small>
+  <div style="margin-bottom:20px;"></div>
+  <h3 style="color:#999;"><?php echo $this->row->description ?></h3>
+  <div class="clear"></div>
+</div>
+
+<div style="margin-bottom:20px;"></div>
+
+<h1>Donec id diam lorem, quis aliquam quam</h1>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam velit turpis, laoreet et aliquet non, venenatis eget turpis. Mauris ac mauris tortor, id bibendum libero. Cras in augue felis, ut pharetra dui. Morbi ac neque nunc, nec pretium justo. Proin at libero urna. In hac habitasse platea dictumst. Sed et dapibus est. Vestibulum eu ante tortor. Vivamus rhoncus nisi a dolor mattis vestibulum.</p>
+
+<h1>Maecenas mollis eros vitae massa mattis vel aliquet orci venenatis.</h1>
+<p>Aenean turpis lorem, luctus quis aliquet vitae, ultricies a urna. Aliquam vel sem mi, eu suscipit turpis. Maecenas metus purus, ornare ac semper vel, semper nec leo. Pellentesque lacus justo, tristique eget porta vel, posuere et sem. Nullam quis sem ac tortor consectetur fermentum ut nec felis. Vestibulum gravida tellus ligula, id varius nibh. In blandit, lectus laoreet commodo vulputate, justo libero lobortis tellus, ut luctus lorem massa a libero. Integer dignissim, augue et tristique aliquet, metus quam malesuada velit, vitae placerat erat nunc at justo. Mauris vel vestibulum erat. Vestibulum gravida porttitor quam gravida suscipit. Ut egestas urna ut turpis dapibus blandit. Quisque dictum, orci ut adipiscing placerat, odio nunc convallis felis, auctor sagittis nulla turpis eu dolor. Praesent a libero vitae enim pulvinar posuere vel id enim. Morbi vel tellus id orci vestibulum congue id vitae nulla. Pellentesque tincidunt vehicula tortor.</p>
+
+<div class="author" style="background: #f0f0f0 url(/img/avatars/<?php echo $this->row->avatar ?>) no-repeat 3% 37%;">
+  <div class="right">
+    <p><?php echo $this->row->bio ?></p>
+  </div>
+  <div class="clear"></div>
+</div>

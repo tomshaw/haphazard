@@ -1,0 +1,30 @@
+<div class="page-header">
+  <h1>Poll survey <small><?= $this->title ?></small></h1>
+</div>
+
+<p class="blog" style="font-size:1.2em;"><?= $this->description ?></p>
+
+<div class="row">
+  <div class="span12">
+    <form class="form-vertical" method="post" action="/polls">
+      <?= $this->formHidden('id', $this->id, $attribs = null) ?>
+      <?php echo $this->token ?>
+      <fieldset id="transaction_form">
+        <?php foreach($this->options as $option): ?>
+        <div class="control-group">
+          <div class="controls">
+            <label class="radio" style="font-size:1.4em;color:#777;">
+              <input type="radio" name="option_id" value="<?= $option->id ?>"> <?= $option->options ?> 
+            </label>
+            <hr>
+          </div>
+        </div>
+        <?php endforeach; ?>
+        <div class="form-actions">
+          <button id="submit" data-loading-text="submitting..." class="btn btn-primary">Submit</button>
+          <button class="btn">Cancel</button>
+        </div>  
+      </fieldset>
+    </form>
+  </div>
+</div>

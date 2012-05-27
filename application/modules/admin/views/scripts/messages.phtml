@@ -1,0 +1,23 @@
+<?php if (count($this->messages)): ?>
+<?php if ($this->messageType == 'success'): ?>
+<div class="alert fade in">
+  <a class="close" data-dismiss="alert" href="#">×</a>
+  <strong>Completed successfully!</strong> 
+  <br/><br/>
+  <?php foreach($this->messages as $message): ?>
+  <p><?php echo $message ?></p>
+  <?php endforeach; ?>
+</div>
+<?php else: ?>
+<div class="alert alert-block alert-error fade in">
+  <a class="close" data-dismiss="alert" href="#">×</a>
+  <h4 class="alert-heading" style="margin-top:-5px;">Oh snap! You got an error!</h4>
+  <br/>
+  <?php foreach($this->messages as $message): ?>
+  <p><?php echo $message ?></p>
+  <?php endforeach; ?>
+  <br/>
+  <p><a class="btn btn-danger" href="mailto:admin@haphazard.dev">Notifiy Administrator</a> <a class="btn" href="/<?php echo $this->moduleName; ?>/<?php echo $this->controllerName; ?>">Return to menu.</a></p>
+</div>
+<?php endif; ?>
+<?php endif; ?>

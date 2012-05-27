@@ -1,0 +1,11 @@
+<div id="blog-list">
+  <?php foreach($this->entries as $entry): ?>
+  <div class="page-header" style="border-bottom:none;">
+    <h1><?= urldecode($entry->title) ?></h1> 
+    <h1><small>By <i><?= $entry->author ?>.</i> Published on, <?= new Zend_Date($entry->created) ?>.</small></h1>
+  </div>
+  <p class="blog"><?php echo nl2br($entry->body) ?></p>
+  <p class="blog"><?php if($entry->comment_count): ?> <span class="pull-right" style="margin-right:25px;">Comments: #<?php echo $entry->comment_count ?></span><?php endif; ?> Full story: <a href="/entry/<?= urlencode($entry->title) ?>" title="Read: <?= $entry->title ?>"><?= $entry->title ?></a></p>
+  <hr>
+  <?php endforeach; ?>
+</div>

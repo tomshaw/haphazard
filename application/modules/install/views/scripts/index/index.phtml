@@ -1,0 +1,17 @@
+<div class="page-header">
+  <h1>System installation <small>Use this form to run the installation file.</small></h1>
+</div>
+
+<div class="row">
+  <div class="span12">
+    <form class="form-horizontal" method="post" action="/install">
+      <input type="hidden" name="mode" value="start" />
+      <?php echo $this->token; ?>
+      <fieldset id="transaction_form">
+        <div class="form-actions">
+          <button id="submit" data-loading-text="submitting..." class="btn btn-primary">Start Installation</button>
+        </div>  
+      </fieldset>
+    </form>
+  </div>
+</div>

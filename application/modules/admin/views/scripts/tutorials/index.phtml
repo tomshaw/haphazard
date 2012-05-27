@@ -1,0 +1,58 @@
+<div class="page-header">
+  <h1>Haphazard - Zend Framework Development</h1>
+  <p>A simple quick start application created to explorer and learn the basics of Zend Framework</p>
+</div>
+
+<?php if(sizeof($this->new)): ?>
+<form method="post" id="form" action="/admin/tutorials/add">
+<div class="panel">
+  <div class="inner"><span class="corners-top"><span></span></span>
+	<h3>Available Tutorials</h3> 
+	<p>You can initialize multiple tutorials in one go by selecting each tutorial file name using your mouse. Hold down the <span style="text-decoration: underline;">mouse button</span> to add one or more tutorials automatically and hit the submit button.</p> 
+	<fieldset> 
+	  <dl> 
+		<dt><label for="new_tutorials">Waiting Tutorials:</label><br /><span>Select the required tutorials and click the submit button.</span></dt>  
+		<dd><?= $this->formSelect('rows', null, array('id' => 'new_tutorials', 'multiple' => 'multiple'), $this->new) ?></dd> 
+	  </dl> 
+	</fieldset> 
+    <fieldset class="submit-buttons"> 
+      <input type="submit" name="bansubmit" value="Submit" class="button1" /> 
+    </fieldset> 
+  <span class="corners-bottom"><span></span></span></div>
+</div>
+</form>
+<?php endif; ?>
+
+<div style="text-align:left;margin:5px;">
+  <?php echo $this->paginationControl($this->rows, 'Jumping', 'gridpage.phtml'); ?>
+</div>
+
+<form method="post" id="form" action="/admin/tutorials/edit">
+  <?= $this->formHidden('id') ?>
+  <input type="hidden" name="listing" value="1">
+  <table class="table table-striped table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th style="width: 5%; text-align: center;">Edit</th>
+        <th style="width: 60%;">&nbsp;Title</th>
+        <th style="width: 10%; text-align: center;">Approved</th>
+        <th style="width: 20%; text-align: center;">Created</th>
+        <th style="width: 5%; text-align: center;">Del</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php if(sizeof($this->rows)): ?>
+      <?php foreach($this->rows as $row): ?>
+      <?php $colour = $this->cycle(array("#baccd9","#cadceb"))->next(); ?>
+      <tr>
+        <td style="text-align: center;"><?= $this->formSubmit('submit', 'Edit', array('onclick' => "this.form.id.value='{$row->id}'", "class" => "btn", "title" => 'Edit')) ?></td>
+        <td><strong><a href="/admin/tutorials/edit/id/<?= $row->id ?>" title="Edit Tutorial"><?= ucwords(str_replace("-", " ", $row->file)) ?></a></strong><br /><?= $row->description; ?></td>
+        <td style="text-align: center;"><strong><?php if($row->approved): ?>Yes<?php else: ?>No<?php endif; ?></strong></td>
+        <td style="text-align: center;"><strong><?= new Zend_Date($row->created); ?></strong></td>
+        <td style="text-align: center;"><strong><a class="btn" href="/admin/tutorials/delete/<?= $row->id ?>" title="Delete Tutorial" onclick="return confirm('Are you sure you wish to delete selected entries');">#</a></strong></td>
+      </tr>
+      <?php endforeach; ?>
+      <?php endif; ?>
+    </tbody>
+  </table>
+</form>

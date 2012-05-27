@@ -1,0 +1,49 @@
+<table class="table table-striped table-bordered table-condensed profiler">
+  <thead>
+    <tr>
+      <th style="text-align: center; width:5%;">Count</th>
+      <th style="text-align: left; width:80%;">&nbsp;SQL Statement</th>
+      <th style="text-align: left; width:15%;">Time</th>
+    </tr>
+  </thead>
+  <tbody>
+  	<?php foreach($this->queries as $out): ?>
+    <tr>
+      <td style="text-align: center;"><?php echo $out['count'] ?>.</td>
+      <td><?php echo $out['query'] ?></td>
+      <td><i><?php echo $out['seconds'] ?></i></td>
+    </tr>
+    <?php endforeach; ?>
+  </tbody>
+</table>
+<br />
+<table class="table table-striped table-bordered table-condensed profiler">
+  <thead>
+    <tr>
+      <th style="text-align:left; width: 85%">&nbsp;Statistic</th>
+      <th style="text-align:left; width: 15%">Value</th>
+    </tr>
+  </thead>	
+  <tbody>
+    <tr>
+      <td>Total milliseconds:</td>
+      <td style="text-align:left;"><?php echo $this->elapsedMilliSeconds ?></td>
+    </tr>
+    <tr>
+      <td>Average query time:</td>
+      <td style="text-align:left;"><?php echo $this->averageQueryTime ?></td>
+    </tr>
+    <tr>
+      <td>Queries per second:</td>
+      <td style="text-align:left;"><?php echo $this->queriesPerSecond ?></td>
+    </tr>
+    <tr>
+      <td>Longest query time:</td>
+      <td style="text-align:left;"><?php echo $this->longestQueryTime ?></td>
+    </tr>
+    <tr>
+      <td>Longest query id:</td>
+      <td style="text-align:left;">#<?php echo $this->longestQueryId ?>.</td>
+    </tr>
+  </tbody>
+</table>

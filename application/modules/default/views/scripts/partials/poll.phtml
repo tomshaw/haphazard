@@ -1,0 +1,19 @@
+<div id="pollresults" class="ptakepoll" style="width:300px; margin:10px 0 15px 15px;">
+  <div class="title">
+    <h2>Demographic Survey</h2>
+  </div>
+  <form method="post" action="/polls">
+  <?= $this->formHidden('id', $this->poll_data[0]->poll_id, $attribs = null) ?>
+  <div id="poll_block">
+    <p><span>D</span>o you like Polls? Take this poll <?= $this->title ?> and compare your answers to other online members.</p>
+    <div class="optcontainer">
+      <h3><?= $this->poll_data[0]->title ?></h3>
+      <div class="options">
+        <?php foreach($this->poll_data as $option): ?>
+        <input type="radio" name="option_id" value="<?= $option->option_id ?>"> <span><?= $option->options ?></span><br />
+        <?php endforeach; ?>
+      </div>
+    </div>
+    <div class="submit"><input type="image" name="submit" src="/img/takepoll_off.gif" onmouseover="this.src='/img/takepoll_on.gif'" onmouseout="this.src='/img/takepoll_off.gif'" title="Submit Answer" style="cursor: hand;" /></div>
+  </div></form>
+</div> 
