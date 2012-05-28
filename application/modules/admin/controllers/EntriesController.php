@@ -6,7 +6,7 @@
  */
 class Admin_EntriesController extends Zend_Controller_Action
 {
-	protected $_redirector;
+    protected $_redirector;
 	
     public function init()
     {

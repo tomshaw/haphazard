@@ -39,7 +39,8 @@ class Default_Model_Entries extends Zend_Db_Table_Abstract
     
     public function fetchEntryById($id)
     {
-        $select = $this->getAdapter()->select()->from(array('entry' => 'entries'), array('id','title','body','continued','user_id','parent_id','comments','draft','trackbacks','approved','created','modified'))
+        $select = $this->getAdapter()->select()
+            ->from(array('entry' => 'entries'), array('id','title','body','continued','user_id','parent_id','comments','draft','trackbacks','approved','created','modified'))
             ->joinLeft(array('users' => 'users'), 'users.id = entry.user_id', array('name AS author','email'))
             ->where('entry.id = ?', intval($id));
         return $this->getAdapter()->fetchRow($select);
@@ -47,7 +48,8 @@ class Default_Model_Entries extends Zend_Db_Table_Abstract
     
     public function fetchEntryByTitle($title = null)
     {
-        $select = $this->getAdapter()->select()->from(array('entry' => 'entries'), array('id','title','body','continued','user_id','parent_id','comments','draft','trackbacks','approved','created','modified'))
+        $select = $this->getAdapter()->select()
+            ->from(array('entry' => 'entries'), array('id','title','body','continued','user_id','parent_id','comments','draft','trackbacks','approved','created','modified'))
             ->joinLeft(array('user' => 'users'), 'user.id = entry.user_id', array('name AS author','email'))
             ->where('entry.title = ?', $title);
         return $this->getAdapter()->fetchRow($select);
@@ -98,7 +100,7 @@ class Default_Model_Entries extends Zend_Db_Table_Abstract
             ->joinLeft(array('users' => 'users'), 'users.id = entry.user_id', array('name AS author','email'))
             ->where("entry.created >= ?", $ts)
             ->where("entry.created <= ?", $te)
-            ->where("entry.parent_id <> ?", '0')
+            ->where("entry.parent_id <> 0")
             ->order($order . ' ' . $direction)->limit($limit);
         return $this->getAdapter()->fetchAll($select);
     }
@@ -109,7 +111,7 @@ class Default_Model_Entries extends Zend_Db_Table_Abstract
             ->from(array('entry' => 'entries'), array('id','title','parent_id'))
             ->where('entry.draft = 0')
             ->where('entry.approved = 1')
-            ->where("entry.parent_id = ?", '0');
+            ->where('entry.parent_id = 0');
         return $this->getAdapter()->fetchAll($select);
     }
     
@@ -120,7 +122,7 @@ class Default_Model_Entries extends Zend_Db_Table_Abstract
             ->joinLeft(array('users' => 'users'), 'users.id = entry.user_id', array('name AS author','email'))
             ->where('entry.draft = 0')
             ->where('entry.approved = 1')
-            ->where("entry.parent_id = ?", '0')
+            ->where('entry.parent_id = 0')
             ->order($order . ' ' . $direction)
             ->limit($limit);
         return $this->getAdapter()->fetchAll($select);
@@ -134,7 +136,7 @@ class Default_Model_Entries extends Zend_Db_Table_Abstract
             ->where('entry.parent_id = ?', $id)
             ->where('entry.draft = 0')
             ->where('entry.approved = 1')
-            ->where("entry.parent_id != ?", '0')
+            ->where('entry.parent_id != 0')
             ->order($order . ' ' . $direction);
         return $this->getAdapter()->fetchAll($select);
     }
@@ -148,8 +150,8 @@ class Default_Model_Entries extends Zend_Db_Table_Abstract
             ->where("DATE_FORMAT(FROM_UNIXTIME(created), '%Y') = ?", $year)
             ->where("DATE_FORMAT(FROM_UNIXTIME(created), '%c') = ?", $month)
             ->where("entry.created <= ?", $timestamp)
-            ->where("entry.parent_id <> ?", '0')
-            ->where("entry.draft <> ?", '1');
+            ->where("entry.parent_id <> 0")
+            ->where("entry.draft <> 1");
         return $this->getAdapter()->fetchAll($select);
     }
     
@@ -165,16 +167,16 @@ class Default_Model_Entries extends Zend_Db_Table_Abstract
         return $this->getAdapter()->fetchRow($select);
     }
     
-    public function queryTags($title, $order = 'entry.id')
+    public function queryTags($string, $order = 'entry.id')
     {
-        $string = strtolower($title);
+        $string = strtolower($string);
         
         $select = $this->getAdapter()->select()
             ->from(array('entry' => 'entries'), array('id','title','body','continued','user_id','parent_id','comments','draft','trackbacks','approved','created','modified'))
             ->joinLeft(array('users' => 'users'), 'users.id = entry.user_id', array('name AS author','email'))
-            ->where('entry.draft = ?', '0')
-            ->where('entry.approved = ?', '1')
-            ->where('entry.parent_id <> ?', '0')
+            ->where('entry.draft = 0')
+            ->where('entry.approved = 1')
+            ->where('entry.parent_id <> 0')
             ->where('LOWER(entry.title) LIKE ?', '%' . $string . '%')
             ->orWhere('LOWER(entry.body) LIKE ?', '%' . $string . '%')
             ->where('LOWER(entry.continued) LIKE ?', '%' . $string . '%')
@@ -285,9 +287,9 @@ class Default_Model_Entries extends Zend_Db_Table_Abstract
             ->from($this->_name, array('COUNT(id) AS orderkey'))
             ->where("created >= ?", $ts)
             ->where("created <= ?", $te)
-            ->where("approved <> ?", '0')
-            ->where("parent_id <> ?", '0')
-            ->where("draft <> ?", '1')
+            ->where("approved <> 0")
+            ->where("parent_id <> 0")
+            ->where("draft <> 1")
             ->order('created DESC');
         return $this->getAdapter()->fetchAll($select);
     }
@@ -312,7 +314,8 @@ class Default_Model_Entries extends Zend_Db_Table_Abstract
     public function getParents($range, $target = false)
     {
         $switch = (true === $target) ? '=' : '';
-        $select = $this->select()->from($this->_name)
+        $select = $this->select()
+            ->from($this->getTableName())
             ->where('right_id >' . $switch . ' ?', (int) $range->right_id)
             ->where('left_id <' . $switch . ' ?', (int) $range->left_id);
         return $this->getAdapter()->fetchAll($select);
@@ -321,7 +324,8 @@ class Default_Model_Entries extends Zend_Db_Table_Abstract
     public function getChildren($range, $target = false)
     {
         $switch = (true === $target) ? '=' : '';
-        $select = $this->select()->from($this->_name)
+        $select = $this->select()
+            ->from($this->getTableName())
             ->where('right_id <' . $switch . ' ?', (int) $range->right_id)
             ->where('left_id >' . $switch . ' ?', (int) $range->left_id);
         return $this->getAdapter()->fetchAll($select);
