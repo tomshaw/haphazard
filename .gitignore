@@ -1,0 +1,8 @@
+.buildpath
+.project
+.settings
+.zfproject.xml
+application/configs/keys.ini
+application/configs/application.ini
+library/ZendX/*
+!.gitignore

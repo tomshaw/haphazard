@@ -1,0 +1,14 @@
+<?php if(sizeof($this->friends)): ?>
+<div id="twitter" style="margin:20px;width:180px;">
+  <div class="twitter-wrap">
+    <?php foreach($this->friends as $friends): ?>
+    <ul class="unstyled" style="list-style-type:none;">
+      <?php foreach($friends as $friend): ?>
+      <li style="float:left;"><a href="<?= $friend['url'] ?>" title="<?= $friend['name'] ?>" target="_blank"><img src="<?= $friend['image'] ?>" width="30" height="30" alt="<?= $friend['description'] ?>"></a></li>
+      <?php endforeach; ?>
+    </ul>
+    <?php endforeach; ?>
+    <div style="clear:both;"></div>
+  </div>
+</div>
+<?php endif; ?>
